@@ -6,10 +6,8 @@ class Gender(Enum):
     FEMALE = 'FEMALE'
 
 class Animal:
-    def __init__(self, dimension_world: (int, int)):
+    def __init__(self):
         self.age_days = 0
-        self.dimension_world = dimension_world
-        self.position = (random.randint(0, dimension_world[0] - 1), random.randint(0, dimension_world[1] - 1))
 
     def get_older(self, day: int = 1):
         self.age_days += day
@@ -24,11 +22,11 @@ class Animal:
         self.position = (new_x, new_y)
 
 class FemaleAnimal(Animal):
-    def __init__(self, dimension_world: (int, int)):
-        super().__init__(dimension_world)
+    def __init__(self):
+        super().__init__()
         self.gender = Gender.FEMALE
 
 class MaleAnimal(Animal):
-    def __init__(self, dimension_world: (int, int)):
-        super().__init__(dimension_world)
+    def __init__(self):
+        super().__init__()
         self.gender = Gender.MALE
