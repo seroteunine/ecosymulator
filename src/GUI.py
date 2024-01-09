@@ -17,6 +17,12 @@ class GUI:
         self.WIDTH_AGENT = self.WIDTH_SCREEN / self.world.grid_dimension[0]
         self.HEIGHT_AGENT =  self.HEIGHT_SCREEN / self.world.grid_dimension[1]
 
+    def process_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False 
+        return True 
+
     def refresh(self):
         self.screen.fill("white")
 

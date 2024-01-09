@@ -1,6 +1,8 @@
 import argparse
 import time
 
+import pygame
+
 from world import World
 from GUI import GUI
 
@@ -9,9 +11,12 @@ def main():
     world = World(args.amount, args.dimension)
     frontend = GUI(world)
     while True:
+        if not frontend.process_events():
+            break
         world.update_simulation()
         frontend.refresh()
         time.sleep(args.time)
+    pygame.quit() 
     
 def get_arguments():
     parser = argparse.ArgumentParser(prog='EcoSymulator',
