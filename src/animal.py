@@ -1,11 +1,16 @@
+from enum import Enum
 import random
 
+class Gender(Enum):
+    MALE = 'MALE',
+    FEMALE = 'FEMALE'
 
 class Animal:
     def __init__(self, dimension_world: (int, int)):
         self.age_days = 0
         self.dimension_world = dimension_world
         self.position = (random.randint(0, dimension_world[0] - 1), random.randint(0, dimension_world[1] - 1))
+        self.gender = random.choice(list(Gender))
 
     def add_age_day(self, day: int = 1):
         self.age_days += day

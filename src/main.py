@@ -8,7 +8,6 @@ def main():
     args = get_arguments()
     world = World(args.amount, args.dimension)
     frontend = GUI(world)
-    frontend.initialize()
     while True:
         world.update_simulation()
         frontend.refresh()
