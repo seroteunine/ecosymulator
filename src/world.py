@@ -17,6 +17,10 @@ class World:
             self.grid[y][x].add_animal(animal)
 
     def update_simulation(self):
+        self.__move_animals()
+        self.__next_day()
+
+    def __move_animals(self):
         for y in range(self.Y):
             for x in range(self.X):
                 old_cell = self.grid[y][x]
@@ -26,6 +30,13 @@ class World:
                     new_cell = self.grid[new_y][new_x]
                     old_cell.remove_animal(animal)
                     new_cell.add_animal(animal)
+
+    def __next_day(self):
+        for y in range(self.Y):
+            for x in range(self.X):
+                cell = self.grid[y][x]
+                for animal in cell.animals:
+                    animal.get_older()
 
     def draw_world(self):
         for animal in self.animals:
