@@ -1,4 +1,5 @@
-from animal import Animal
+import random
+from animal import Animal, FemaleAnimal, MaleAnimal
 
 class World:
     def __init__(self, amount: int, dimension: (int, int)):
@@ -8,13 +9,18 @@ class World:
         
     def __initialize_animals(self, amount: int):
         for _ in range(amount):
-            animal: Animal = Animal(self.grid_dimension)
+            animal_class = random.choice([FemaleAnimal, MaleAnimal])
+            animal: Animal = animal_class(self.grid_dimension)
             self.animals.append(animal)
 
     def update_simulation(self):
         for animal in self.animals:
             animal.make_move()
-            animal.add_age_day()
+        self.__to_next_day()
+
+    def __to_next_day(self):
+        for animal in self.animals:
+            animal.get_older()
 
     def draw_world(self):
         for animal in self.animals:
