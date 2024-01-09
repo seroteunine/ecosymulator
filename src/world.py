@@ -19,7 +19,13 @@ class World:
     def update_simulation(self):
         for y in range(self.Y):
             for x in range(self.X):
-                print(self.grid[y][x].animals)
+                old_cell = self.grid[y][x]
+                for animal in old_cell.animals:
+                    dx, dy = random.randint(-1, 1), random.randint(-1, 1)
+                    new_x, new_y = max(0, min(self.X - 1, x + dx)), max(0, min(self.Y - 1, y + dy))
+                    new_cell = self.grid[new_y][new_x]
+                    old_cell.remove_animal(animal)
+                    new_cell.add_animal(animal)
 
     def draw_world(self):
         for animal in self.animals:

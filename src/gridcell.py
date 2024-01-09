@@ -3,12 +3,12 @@ from animal import Animal
 class GridCell:
     def __init__(self, x, y):
         self.position = (x, y)
-        self.animals = set()
+        self.animals = []
 
     def add_animal(self, animal: Animal):
-        self.animals.add(animal)
+        self.animals.append(animal)
 
     def remove_animal(self, animal: Animal):
-        if animal in self.animals:
-            self.animals.remove(animal)
-    
+        for _animal in self.animals:
+            if _animal == animal:
+                self.animals.remove(animal)
