@@ -8,7 +8,7 @@ def main():
     world = World(args.amount, args.dimension)
     while True:
         world.update_simulation()
-        print(world.animals)
+        world.draw_world()
         time.sleep(args.time)
     
 def get_arguments():
