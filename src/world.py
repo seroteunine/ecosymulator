@@ -11,13 +11,20 @@ class World:
     def __initialize_animals(self, amount: int):
         for _ in range(amount):
             animal_class = random.choice([FemaleAnimal, MaleAnimal])
-            animal: Animal = animal_class(self.X, self.Y)
+            animal: Animal = animal_class(self.X, self.Y, self.get_neighbours)
             self.animals.add(animal)
 
     def update_simulation(self):
         for animal in self.animals:
             animal.do_move()
 
-    def draw_world(self):
-        for animal in self.animals:
-            print(animal.position, animal.age_days)
+    def get_neighbours(self, animal, distance: int = 1):
+        neighbours = set()
+        for other_animal in self.animals:
+            if animal != other_animal and self.__calculate_distance(animal, other_animal) <= distance:
+                neighbours.add(other_animal)
+        return neighbours
+    
+    def __calculate_distance(self, animal, other_animal):
+        # Uses Chebyshev distance
+        return max(abs(other_animal.y - animal.y), abs(other_animal.x - animal.x))
