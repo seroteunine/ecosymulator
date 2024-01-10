@@ -6,7 +6,10 @@ from world import World
 class GUI:
     WIDTH_SCREEN = 1280
     HEIGHT_SCREEN = 720
+    MALE_COLOR = 'blue'
+    FEMALE_COLOR = 'pink'
     GRASS_COLOR = pygame.Color(144, 238, 144)
+    WATER_COLOR = pygame.Color(0, 191, 255)
 
     def __init__(self, world: World):
         self.world = world
@@ -25,14 +28,22 @@ class GUI:
         return True 
 
     def refresh(self):
+        #Render land
         self.screen.fill(self.GRASS_COLOR)
 
+        #Render water
+        for x, y in self.world.water_map:
+            position = (x * self.WIDTH_CELL, y * self.HEIGHT_CELL)
+            rect = pygame.Rect(position, (self.WIDTH_CELL, self.HEIGHT_CELL))
+            pygame.draw.rect(self.screen, self.WATER_COLOR, rect)
+
+        #Render animals
         for animal in self.world.animals:
             position = (animal.x * self.WIDTH_CELL, animal.y * self.HEIGHT_CELL)
 
             rect = pygame.Rect(position, (self.WIDTH_CELL, self.HEIGHT_CELL))
-            color = 'blue' if animal.gender == Gender.MALE else 'pink'
-            pygame.draw.rect(self.screen, color, rect, 20)
+            color = self.MALE_COLOR if animal.gender == Gender.MALE else self.FEMALE_COLOR
+            pygame.draw.rect(self.screen, color, rect)
 
             font = pygame.font.Font('freesansbold.ttf', 14)
             text_content = str(animal.age_days)

@@ -7,8 +7,10 @@ class World:
         self.X = dimension[0]
         self.Y = dimension[1]
         self.event_queue = EventQueue()
+        self.water_map = set()
         self.animals = set()
         self.__initialize_animals(amount)
+        self.__initialize_water(10)
 
     def update_simulation(self):
         for animal in set(self.animals): #Use copy so that its size is not changed during iteration
@@ -26,9 +28,13 @@ class World:
         for _ in range(amount):
             self.add_animal_random()
 
+    def __initialize_water(self, amount: int):
+        for _ in range(amount):
+            x, y = random.randint(0, self.X - 1), random.randint(0, self.Y - 1)
+            self.water_map.add((x, y))
+
     def add_animal_random(self):
-        x = random.randint(0, self.X - 1)
-        y = random.randint(0, self.Y - 1)
+        x, y = random.randint(0, self.X - 1), random.randint(0, self.Y - 1)
         self.add_animal(x, y)
 
     def add_animal(self, x, y):
