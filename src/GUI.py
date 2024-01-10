@@ -52,4 +52,12 @@ class GUI:
             textRect.center = position
             self.screen.blit(text, textRect)
 
+        #Render animal count
+        font = pygame.font.Font('freesansbold.ttf', 14)
+        text_content = 'Animal count: ' + str(len(self.world.animals))
+        text = font.render(text_content, True, 'black')
+        textRect = text.get_rect()
+        textRect.top, textRect.left = 5, 5
+        self.screen.blit(text, textRect)
+
         pygame.display.flip()
