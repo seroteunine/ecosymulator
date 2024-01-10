@@ -21,9 +21,9 @@ def main():
 def get_arguments():
     parser = argparse.ArgumentParser(prog='EcoSymulator',
                     description='Simulate an ecosystem of animals')
-    parser.add_argument('amount', type=int, nargs='?', help='The starting amount of animals that live in the simulation (default = 50)', default=150)
+    parser.add_argument('amount', type=int, nargs='?', help='The starting amount of animals that live in the simulation (default = 150)', default=150)
     parser.add_argument('-t','--time', type=float, help='Time in seconds per timestep (default = 0.05 second)', default=0.05)
-    parser.add_argument('-d','--dimension', type=int, nargs=2, help='Dimension (x and y) of the world (default = 50 50 )', default=(80, 80))
+    parser.add_argument('-d','--dimension', type=int, nargs=2, help='Dimension (x and y) of the world (default = 80 80 )', default=(80, 80))
     return parser.parse_args()
 
 if __name__ == '__main__':
