@@ -10,12 +10,23 @@ class World:
         
     def __initialize_animals(self, amount: int):
         for _ in range(amount):
-            animal_class = random.choice([FemaleAnimal, MaleAnimal])
-            animal: Animal = animal_class(self.X, self.Y, self.get_neighbours)
-            self.animals.add(animal)
+            self.add_animal()
+
+    def add_animal(self, **kwargs):
+        x = kwargs.get('x', random.randint(0, self.X - 1))
+        y = kwargs.get('y', random.randint(0, self.Y - 1))
+
+        animal_class = random.choice([FemaleAnimal, MaleAnimal])
+        animal = animal_class(
+            self.X, self.Y, 
+            get_neighbours_callback = self.get_neighbours, 
+            add_animal_callback = self.add_animal, 
+            x=x, y=y
+        )
+        self.animals.add(animal)
 
     def update_simulation(self):
-        for animal in self.animals:
+        for animal in set(self.animals): #Create a copy, so that the copy is not changed, only the original
             animal.do_move()
 
     def get_neighbours(self, animal, distance: int = 1):
