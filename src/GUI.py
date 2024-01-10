@@ -46,7 +46,7 @@ class GUI:
             pygame.draw.rect(self.screen, color, rect)
 
             font = pygame.font.Font('freesansbold.ttf', 14)
-            text_content = str(animal.age_days)
+            text_content = str(animal.age_hours // 24)
             text = font.render(text_content, True, 'black')
             textRect = text.get_rect()
             textRect.center = position

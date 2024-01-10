@@ -1,3 +1,4 @@
+import math
 import random
 from animal import FemaleAnimal, MaleAnimal
 from events import Event, EventEnum, EventQueue
@@ -10,7 +11,7 @@ class World:
         self.water_map = set()
         self.animals = set()
         self.__initialize_animals(amount)
-        self.__initialize_water(10)
+        self.__initialize_water(2, 25)
 
     def update_simulation(self):
         for animal in set(self.animals): #Use copy so that its size is not changed during iteration
@@ -28,10 +29,13 @@ class World:
         for _ in range(amount):
             self.add_animal_random()
 
-    def __initialize_water(self, amount: int):
+    def __initialize_water(self, amount: int, size: int):
         for _ in range(amount):
             x, y = random.randint(0, self.X - 1), random.randint(0, self.Y - 1)
-            self.water_map.add((x, y))
+            radius = int(math.sqrt(size))
+            for dx in range(radius):
+                for dy in range(radius):
+                    self.water_map.add((x + dx, y + dy))
 
     def add_animal_random(self):
         x, y = random.randint(0, self.X - 1), random.randint(0, self.Y - 1)
@@ -43,7 +47,8 @@ class World:
             self.X, self.Y, 
             x, y,
             self.event_queue,
-            self.get_neighbours
+            self.get_neighbours,
+            self.water_map
         )
         self.animals.add(animal)
 
