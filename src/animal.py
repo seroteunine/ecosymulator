@@ -14,7 +14,7 @@ class Animal:
         self.event_queue = event_queue
         self.get_neighbours = get_neighbours_callback
         self.age_days = 0
-        self.MAXIMUM_AGE = 5475
+        self.MAXIMUM_AGE = 1000 #5475
 
     def do_move(self):
         self.__walk_random()

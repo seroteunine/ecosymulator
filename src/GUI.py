@@ -6,6 +6,7 @@ from world import World
 class GUI:
     WIDTH_SCREEN = 1280
     HEIGHT_SCREEN = 720
+    GRASS_COLOR = pygame.Color(144, 238, 144)
 
     def __init__(self, world: World):
         self.world = world
@@ -24,7 +25,7 @@ class GUI:
         return True 
 
     def refresh(self):
-        self.screen.fill("white")
+        self.screen.fill(self.GRASS_COLOR)
 
         for animal in self.world.animals:
             position = (animal.x * self.WIDTH_CELL, animal.y * self.HEIGHT_CELL)
