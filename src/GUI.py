@@ -43,7 +43,7 @@ class GUI:
 
             rect = pygame.Rect(position, (self.WIDTH_CELL, self.HEIGHT_CELL))
             color = self.MALE_COLOR if animal.gender == Gender.MALE else self.FEMALE_COLOR
-            pygame.draw.rect(self.screen, color, rect)
+            pygame.draw.ellipse(self.screen, color, rect)
 
             font = pygame.font.Font('freesansbold.ttf', 14)
             text_content = str(animal.age_hours // 24)
