@@ -43,7 +43,7 @@ class Animal:
         self.age_hours += hours
 
     def __try_dying(self):
-        should_die = self.age_hours // 24 >= self.MAXIMUM_AGE or (self.age_hours // 24 - self.last_day_drank_water) >= self.MAXIMUM__SURVIVABLE_DAYS_WITHOUT_WATER
+        should_die = self.age_hours // 24 > self.MAXIMUM_AGE or (self.age_hours // 24 - self.last_day_drank_water) > self.MAXIMUM__SURVIVABLE_DAYS_WITHOUT_WATER
         if should_die:
             event: Event = Event(EventEnum.DIE, self)
             self.event_queue.add_event(event)
