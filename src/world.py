@@ -11,7 +11,7 @@ class World:
         self.water_map = set()
         self.animals = set()
         self.__initialize_animals(amount)
-        self.__initialize_water(2, 25)
+        self.__initialize_water(3, 150)
 
     def update_simulation(self):
         for animal in set(self.animals): #Use copy so that its size is not changed during iteration

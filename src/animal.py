@@ -17,7 +17,7 @@ class Animal:
         self.age_hours = 0
         self.last_day_drank_water = 0
         self.MAXIMUM_AGE = 1000 #5475 is realistic age in days of sheep
-        self.MAXIMUM__SURVIVABLE_DAYS_WITHOUT_WATER = 10
+        self.MAXIMUM__SURVIVABLE_DAYS_WITHOUT_WATER = 8
 
     def do_move(self):
         self.__try_drink_water()
@@ -26,8 +26,13 @@ class Animal:
         self.__try_dying()
 
     def __try_drink_water(self):
-        if (self.x, self.y) in self.water_map:
-            self.last_day_drank_water = self.age_hours // 24
+        for dx in [-1,0,1]:
+            for dy in [-1,0,1]:
+                nx, ny = self.x + dx, self.y + dy
+                if 0 <= nx < self.max_X_world and 0 <= ny < self.max_Y_world:
+                    if (nx, ny) in self.water_map:
+                        self.last_day_drank_water = self.age_hours // 24
+                        break
 
     def __walk_random(self):
         dir_x, dir_y = random.choice([-1,0,1]), random.choice([-1,0,1])
@@ -47,7 +52,7 @@ class FemaleAnimal(Animal):
     def __init__(self, X, Y, x, y, event_queue, get_neighbours_callback, water_map):
         super().__init__(X, Y, x, y, event_queue, get_neighbours_callback, water_map)
         self.gender = Gender.FEMALE
-        self.PREGNANCY_DURATION_DAYS = 147 #Average pregnancy of sheep
+        self.PREGNANCY_DURATION_DAYS = 3 #147 Average pregnancy of sheep
         self.is_pregnant = False
         self.day_start_pregnancy = None
 
@@ -63,7 +68,7 @@ class FemaleAnimal(Animal):
         self.event_queue.add_event(event)
 
     def get_impregnated(self):
-        if self.age_hours // 24 > 90 and not self.is_pregnant: #Sheep are fertile after 3 months 
+        if self.age_hours // 24 > 5 and not self.is_pregnant: #90 Sheep are fertile after 3 months 
             self.is_pregnant = True
             self.day_start_pregnancy = self.age_hours // 24
 
